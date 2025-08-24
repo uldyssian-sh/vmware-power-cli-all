@@ -8,6 +8,11 @@ It strictly targets **CurrentUser** scope and includes robust fallbacks to handl
 
 ---
 
+## License for This Repository
+This repository’s own content (README, file list, structure) is licensed under the MIT License. See LICENSE for details.
+
+---
+
 ## What’s new in this version?
 
 - Always installs to **CurrentUser** (never AllUsers).
