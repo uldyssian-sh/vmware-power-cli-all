@@ -1,0 +1,60 @@
+{
+  "name": "vmware-power-cli-all",
+  "version": "1.0.0",
+  "description": "Enterprise-grade VMware PowerCLI installation and management toolkit with advanced automation capabilities",
+  "main": "Install-PowerCLI-All.ps1",
+  "scripts": {
+    "test": "pwsh -Command \"Invoke-Pester -Path ./tests/ -Output Detailed\"",
+    "lint": "pwsh -Command \"Invoke-ScriptAnalyzer -Path . -Recurse\"",
+    "build": "pwsh -Command \"./scripts/build.ps1\"",
+    "docs": "pwsh -Command \"./scripts/generate-docs.ps1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uldyssian-sh/vmware-power-cli-all.git"
+  },
+  "keywords": [
+    "vmware",
+    "powercli",
+    "vsphere",
+    "vcenter",
+    "esxi",
+    "automation",
+    "powershell",
+    "infrastructure",
+    "virtualization",
+    "enterprise",
+    "deployment",
+    "management",
+    "devops",
+    "cloud",
+    "datacenter"
+  ],
+  "author": "VMware PowerCLI Community",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uldyssian-sh/vmware-power-cli-all/issues"
+  },
+  "homepage": "https://github.com/uldyssian-sh/vmware-power-cli-all#readme",
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "semantic-release": "^22.0.12"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}
