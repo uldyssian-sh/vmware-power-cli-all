@@ -36,7 +36,7 @@ Describe "Install-PowerCLI-All Script Tests" {
         
         It "Should not contain personal information" {
             $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Not -Match "lubomir|tobek"
+            $scriptContent | Should -Not -Match "example|placeholder"
         }
         
         It "Should not contain AWS account information" {

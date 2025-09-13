@@ -8,6 +8,8 @@
 
 > **🎯 Enterprise-grade VMware PowerCLI installation and management toolkit with advanced automation capabilities, comprehensive testing, and production-ready deployment scripts.**
 
+**Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)
+
 **⚡ Zero-admin installation • 🔒 Security hardened • 🌐 Cross-platform • 📊 Enterprise ready**
 
 ## ✨ Key Features
