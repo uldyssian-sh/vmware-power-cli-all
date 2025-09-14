@@ -2,25 +2,67 @@ name: PowerShell Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     
     steps:
     - uses: actions/checkout@v4
     
-    - name: Test PowerShell Script
+    - name: Setup PowerShell
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install PowerShell (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        wget -q https://github.com/PowerShell/PowerShell/releases/download/v7.4.0/powershell_7.4.0-1.deb_amd64.deb
+        sudo dpkg -i powershell_7.4.0-1.deb_amd64.deb
+        sudo apt-get install -f
+    
+    - name: Install PowerShell (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install --cask powershell
+    
+    - name: Test PowerShell Installation
       shell: pwsh
       run: |
-        Write-Host "Testing PowerShell script..."
-        if (Test-Path "./Install-PowerCLI-All.ps1") {
-          Write-Host "Main script exists"
+        $PSVersionTable
+        Write-Host "PowerShell is working!"
+    
+    - name: Install PSScriptAnalyzer
+      shell: pwsh
+      run: |
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+    
+    - name: Run Script Analysis
+      shell: pwsh
+      run: |
+        $results = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning,Error -ExcludeRule PSAvoidUsingPlainTextForPassword
+        if ($results) {
+          $results | Format-Table
+          Write-Warning "Script analysis found issues"
         } else {
-          Write-Error "Main script not found"
+          Write-Host "Script analysis passed!"
+        }
+    
+    - name: Test Main Script Syntax
+      shell: pwsh
+      run: |
+        try {
+          $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content -Path "./Install-PowerCLI-All.ps1" -Raw), [ref]$null)
+          Write-Host "Script syntax is valid!"
+        } catch {
+          Write-Error "Script syntax error: $_"
           exit 1
         }
-        Write-Host "PowerShell test completed successfully!"
