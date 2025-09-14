@@ -1,7 +1,7 @@
 # 🚀 VMware PowerCLI Complete Installation Suite
 
 [![CI/CD Pipeline](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/ci.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/ci.yml)
-[![PowerShell Gallery](https://img.shields.io/badge/PowerShell%20Gallery-VMware.PowerCLI-blue.svg)](https://www.powershellgallery.com/packages/VMware.PowerCLI)
+![Tests](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/test.yml/badge.svg)[![PowerShell Gallery](https://img.shields.io/badge/PowerShell%20Gallery-VMware.PowerCLI-blue.svg)](https://www.powershellgallery.com/packages/VMware.PowerCLI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-power-cli-all?style=social)](https://github.com/uldyssian-sh/vmware-power-cli-all/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/uldyssian-sh/vmware-power-cli-all?style=social)](https://github.com/uldyssian-sh/vmware-power-cli-all/network/members)
