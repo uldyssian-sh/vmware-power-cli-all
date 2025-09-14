@@ -24,9 +24,12 @@ jobs:
     - name: Install PowerShell (Linux)
       if: runner.os == 'Linux'
       run: |
-        wget -q https://github.com/PowerShell/PowerShell/releases/download/v7.4.0/powershell_7.4.0-1.deb_amd64.deb
-        sudo dpkg -i powershell_7.4.0-1.deb_amd64.deb
-        sudo apt-get install -f
+        sudo apt-get update
+        sudo apt-get install -y wget apt-transport-https software-properties-common
+        wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y powershell
     
     - name: Install PowerShell (macOS)
       if: runner.os == 'macOS'
