@@ -1,0 +1,56 @@
+name: PowerShell Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install PowerShell (Ubuntu/macOS)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https software-properties-common
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          brew install --cask powershell
+        fi
+    
+    - name: Test PowerShell Installation
+      shell: pwsh
+      run: |
+        $PSVersionTable
+        Write-Host "PowerShell is working!"
+    
+    - name: Run Script Analysis
+      shell: pwsh
+      run: |
+        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+        $results = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning,Error
+        if ($results) {
+          $results | Format-Table
+          exit 1
+        }
+        Write-Host "Script analysis passed!"
+    
+    - name: Test Main Script
+      shell: pwsh
+      run: |
+        # Test script syntax
+        $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content -Path "./Install-PowerCLI-All.ps1" -Raw), [ref]$null)
+        Write-Host "Script syntax is valid!"

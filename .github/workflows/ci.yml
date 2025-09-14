@@ -1,8 +1,14 @@
-name: Tests
+name: Basic CI
 on: [push, pull_request]
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
     steps:
-    - name: Always Pass
-      run: echo "SUCCESS"
+    - uses: actions/checkout@v4
+    - name: Validate Repository Structure
+      run: |
+        echo "Checking repository structure..."
+        test -f Install-PowerCLI-All.ps1 || exit 1
+        test -f README.md || exit 1
+        test -d scripts || exit 1
+        echo "Repository structure is valid!"
