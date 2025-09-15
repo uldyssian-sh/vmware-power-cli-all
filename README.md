@@ -1,5 +1,22 @@
 # 🚀 VMware PowerCLI Complete Installation Suite
 
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
+## Prerequisites
+
+Before using this project, ensure you have:
+- Required tools and dependencies
+- Proper access credentials
+- System requirements met
+
+
 [![CI/CD Pipeline](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/ci.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/ci.yml)
 ![Tests](https://github.com/uldyssian-sh/vmware-power-cli-all/actions/workflows/test.yml/badge.svg)[![PowerShell Gallery](https://img.shields.io/badge/PowerShell%20Gallery-VMware.PowerCLI-blue.svg)](https://www.powershellgallery.com/packages/VMware.PowerCLI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -197,3 +214,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [Report Bug](https://github.com/uldyssian-sh/vmware-power-cli-all/issues) • [Request Feature](https://github.com/uldyssian-sh/vmware-power-cli-all/issues) • [Contribute](CONTRIBUTING.md)
 
 </div>
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
+- How to submit issues
+- How to propose changes
+- Code style guidelines
+- Review process
+
+## Support
+
+- 📖 [Wiki Documentation](../../wiki)
+- 💬 [Discussions](../../discussions)
+- 🐛 [Issue Tracker](../../issues)
+- 🔒 [Security Policy](SECURITY.md)
+
+---
+**Made with ❤️ for the community**
