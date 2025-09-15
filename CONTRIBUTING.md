@@ -61,10 +61,10 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
    ```powershell
    # Use approved verbs
    function Get-VMwareModule { }
-   
+
    # Use PascalCase for functions and variables
    $ModulePath = "C:\Modules"
-   
+
    # Use descriptive parameter names
    param(
        [string]$ServerName,
@@ -89,13 +89,13 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
    <#
    .SYNOPSIS
        Brief description of the function
-   
+
    .DESCRIPTION
        Detailed description of what the function does
-   
+
    .PARAMETER ParameterName
        Description of the parameter
-   
+
    .EXAMPLE
        Example of how to use the function
    #>

@@ -127,7 +127,7 @@ Connect-VIServer : Could not connect using the requested protocol.
    ```powershell
    # Test connectivity
    Test-NetConnection -ComputerName vcenter.example.com -Port 443
-   
+
    # Try with IP address instead of hostname
    Connect-VIServer -Server 192.168.1.100
    ```
@@ -197,7 +197,7 @@ Connect-VIServer : Login failure
    ```powershell
    # Use UPN format
    Connect-VIServer -Server vcenter.example.com -User "user@domain.com"
-   
+
    # Use local vCenter account
    Connect-VIServer -Server vcenter.example.com -User "administrator@vsphere.local"
    ```
@@ -237,7 +237,7 @@ Connect-VIServer -Server vcenter.example.com
    ```powershell
    # List all VMware modules
    Get-Module -ListAvailable VMware.*
-   
+
    # Remove old versions
    Get-Module VMware.* | Where-Object { $_.Version -lt "12.0" } | Uninstall-Module
    ```
@@ -250,7 +250,7 @@ Connect-VIServer -Server vcenter.example.com
    ```powershell
    # Good - filter on server
    Get-VM -Name "web*"
-   
+
    # Bad - filter locally
    Get-VM | Where-Object { $_.Name -like "web*" }
    ```
@@ -303,11 +303,11 @@ WARNING: The names of some imported commands from the module 'VMware.VimAutomati
 **Solution:**
 ```powershell
 # Remove old versions
-Get-Module VMware.* -ListAvailable | 
-    Group-Object Name | 
-    ForEach-Object { 
-        $_.Group | Sort-Object Version -Descending | Select-Object -Skip 1 
-    } | 
+Get-Module VMware.* -ListAvailable |
+    Group-Object Name |
+    ForEach-Object {
+        $_.Group | Sort-Object Version -Descending | Select-Object -Skip 1
+    } |
     Uninstall-Module -Force
 ```
 
@@ -448,9 +448,9 @@ Update-Module VMware.PowerCLI -Force
 
 # Clean up old module versions
 Get-InstalledModule VMware.* | ForEach-Object {
-    Get-InstalledModule $_.Name -AllVersions | 
-    Sort-Object Version -Descending | 
-    Select-Object -Skip 1 | 
+    Get-InstalledModule $_.Name -AllVersions |
+    Sort-Object Version -Descending |
+    Select-Object -Skip 1 |
     Uninstall-Module -Force
 }
 ```

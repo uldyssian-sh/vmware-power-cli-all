@@ -347,7 +347,7 @@ Get-VM -Name "Prod*" | New-Snapshot -Name "Before-Update" -Description "Pre-upda
 Get-VM | Where-Object { $_.PowerState -eq "PoweredOn" } | ForEach-Object {
     $vm = $_
     $stats = Get-Stat -Entity $vm -Stat "cpu.usage.average", "mem.usage.average" -Start (Get-Date).AddHours(-1)
-    
+
     [PSCustomObject]@{
         VM = $vm.Name
         CPUUsage = ($stats | Where-Object { $_.MetricId -eq "cpu.usage.average" } | Measure-Object -Property Value -Average).Average
