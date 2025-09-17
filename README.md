@@ -1,7 +1,8 @@
 # VMware PowerCLI Complete Toolkit
 
 <div align="center">
-  <img src="https://blogs.vmware.com/PowerCLI/files/2018/02/PowerCLI-Icon.png" alt="PowerCLI" width="200"/>
+
+
   
   [![PowerShell](https://img.shields.io/badge/PowerShell-7.0+-5391FE.svg)](https://github.com/PowerShell/PowerShell)
   [![PowerCLI](https://img.shields.io/badge/PowerCLI-13.0+-00A1C9.svg)](https://www.vmware.com/support/developer/PowerCLI/)
