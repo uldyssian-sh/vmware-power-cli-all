@@ -1,77 +1,47 @@
-# vmware power cli all
+# VMware PowerCLI Complete Toolkit
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-power-cli-all)](https://github.com/uldyssian-sh/vmware-power-cli-all/issues)
-[![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-power-cli-all)](https://github.com/uldyssian-sh/vmware-power-cli-all/stargazers)
-[![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
+<div align="center">
+  <img src="https://blogs.vmware.com/PowerCLI/files/2018/02/PowerCLI-Icon.png" alt="PowerCLI" width="200"/>
+  
+  [![PowerShell](https://img.shields.io/badge/PowerShell-7.0+-5391FE.svg)](https://github.com/PowerShell/PowerShell)
+  [![PowerCLI](https://img.shields.io/badge/PowerCLI-13.0+-00A1C9.svg)](https://www.vmware.com/support/developer/PowerCLI/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</div>
 
-## 🎯 Overview
+## 🚀 Overview
 
-Professional vmware power cli all solution with enterprise-grade automation and security features.
+Comprehensive PowerCLI toolkit for VMware infrastructure automation. Complete collection of scripts, modules, and best practices for vSphere, vSAN, NSX, and vRealize management.
 
-## 📊 Repository Stats
+## ⚡ Quick Start
 
-- **Files:**       41
-- **Technologies:** PowerShell YAML Bash
-- **Type:** Infrastructure Automation
-- **Status:** Production Ready
+```powershell
+# Install PowerCLI
+Install-Module -Name VMware.PowerCLI -Scope CurrentUser
 
-## ✨ Features
-
-- 🏗️ **Enterprise Architecture** - Production-ready infrastructure
-- 🔒 **Zero-Trust Security** - Comprehensive security controls
-- 🚀 **CI/CD Automation** - Automated deployment pipelines
-- 📊 **Monitoring & Observability** - Complete visibility
-- 🤖 **AI Integration** - GitHub Copilot & Amazon Q
-- 🔄 **Self-Healing** - Automatic error recovery
-- 📈 **Performance Optimized** - High-performance configurations
-- 🛡️ **Compliance Ready** - SOC2, GDPR, HIPAA standards
-
-## 🚀 Quick Start
-
-```bash
 # Clone repository
 git clone https://github.com/uldyssian-sh/vmware-power-cli-all.git
 cd vmware-power-cli-all
 
-# Setup environment
-chmod +x setup.sh
-./setup.sh
+# Connect to vCenter
+Connect-VIServer -Server vcenter.example.com
+
+# Run bulk VM creation
+.\Scripts\Create-BulkVMs.ps1 -CsvPath "vms.csv"
 ```
 
+## 📦 Script Categories
 
-## ⚡ PowerShell Scripts
-
-```powershell
-# Set execution policy
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Run main script
-.\main.ps1
-```
-
+- **VM Management**: Bulk operations, configuration, migration
+- **Host Operations**: ESXi configuration, maintenance, updates
+- **Storage Management**: vSAN health, datastore operations
+- **Network Configuration**: vSwitch setup, NSX automation
 
 ## 📚 Documentation
 
-- [Installation Guide](docs/installation.md)
-- [Configuration Reference](docs/configuration.md)
-- [API Documentation](docs/api.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Security Policy](SECURITY.md)
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+- [Getting Started](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Getting-Started)
+- [Script Reference](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Scripts)
+- [Best Practices](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Best-Practices)
 
 ## 📄 License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
-
-## 🆘 Support
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/REPO_NAME/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/REPO_NAME/wiki)
-
----
-
-⭐ **Star this repository if you find it helpful!**
+MIT License - see [LICENSE](LICENSE) file for details.
