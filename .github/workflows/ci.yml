@@ -1,17 +1,62 @@
 name: CI
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
+
+env:
+  POWERSHELL_TELEMETRY_OPTOUT: 1
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        powershell-version: ['7.4']
+    
     steps:
-    - uses: actions/checkout@v3
-    - name: Basic validation
+    - uses: actions/checkout@v4
+    
+    - name: Setup PowerShell
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: 'latest'
+        inlineScript: |
+          $PSVersionTable
+    
+    - name: Install Pester
+      shell: pwsh
       run: |
-        echo "Repository: ${{ github.repository }}"
-        echo "Branch: ${{ github.ref }}"
-        ls -la
-        echo "CI passed successfully"
+        Install-Module -Name Pester -Force -Scope CurrentUser -SkipPublisherCheck
+        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+    
+    - name: Run PowerShell Script Analyzer
+      shell: pwsh
+      run: |
+        $results = Invoke-ScriptAnalyzer -Path . -Recurse -ReportSummary
+        if ($results) {
+          $results | Format-Table
+          throw "PSScriptAnalyzer found issues"
+        }
+    
+    - name: Run Pester Tests
+      shell: pwsh
+      run: |
+        $config = New-PesterConfiguration
+        $config.Run.Path = './tests'
+        $config.Output.Verbosity = 'Detailed'
+        $config.CodeCoverage.Enabled = $true
+        $config.CodeCoverage.Path = '*.ps1'
+        $config.TestResult.Enabled = $true
+        $config.TestResult.OutputFormat = 'JUnitXml'
+        $config.TestResult.OutputPath = 'test-results.xml'
+        Invoke-Pester -Configuration $config
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ matrix.os }}
+        path: test-results.xml

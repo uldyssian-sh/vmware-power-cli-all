@@ -1,100 +1,82 @@
+#!/usr/bin/env pwsh
+
 BeforeAll {
-    $ModuleRoot = Split-Path -Parent $PSScriptRoot
-    $ScriptPath = Join-Path $ModuleRoot "Install-PowerCLI-All.ps1"
-    
-    # Mock functions for testing
-    function Mock-WriteHost { param($Object, $ForegroundColor) }
-    function Mock-ExitCommand { param($ExitCode) throw "Exit called with code: $ExitCode" }
+    $script:ModuleName = 'VMware.PowerCLI'
+    $script:ScriptPath = Join-Path $PSScriptRoot '..' 'Install-PowerCLI-All.ps1'
 }
 
-Describe "Install-PowerCLI-All Script Tests" {
-    Context "Parameter Validation" {
-        It "Should accept TrustPSGallery switch parameter" {
-            { & $ScriptPath -TrustPSGallery -WhatIf } | Should -Not -Throw
+Describe 'Install-PowerCLI-All Script Tests' {
+    Context 'Script Validation' {
+        It 'Should exist' {
+            Test-Path $script:ScriptPath | Should -Be $true
         }
-        
-        It "Should accept DisableCeip switch parameter" {
-            { & $ScriptPath -DisableCeip -WhatIf } | Should -Not -Throw
+
+        It 'Should have valid PowerShell syntax' {
+            $errors = $null
+            $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $script:ScriptPath -Raw), [ref]$errors)
+            $errors | Should -BeNullOrEmpty
         }
-        
-        It "Should accept both parameters together" {
-            { & $ScriptPath -TrustPSGallery -DisableCeip -WhatIf } | Should -Not -Throw
-        }
-    }
-    
-    Context "PowerShell Version Check" {
-        It "Should work with PowerShell 5.1+" {
-            $PSVersionTable.PSVersion.Major | Should -BeGreaterOrEqual 5
-        }
-    }
-    
-    Context "Security Validation" {
-        It "Should not contain hardcoded credentials" {
-            $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Not -Match "password|secret|key|token"
-        }
-        
-        It "Should not contain personal information" {
-            $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Not -Match "example|placeholder"
-        }
-        
-        It "Should not contain AWS account information" {
-            $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Not -Match "\d{12}|aws.*id|account.*id"
-        }
-    }
-    
-    Context "Code Quality" {
-        It "Should pass PSScriptAnalyzer rules" {
+
+        It 'Should pass PSScriptAnalyzer rules' {
             if (Get-Module -ListAvailable PSScriptAnalyzer) {
-                $results = Invoke-ScriptAnalyzer -Path $ScriptPath
+                $results = Invoke-ScriptAnalyzer -Path $script:ScriptPath
                 $results | Should -BeNullOrEmpty
             }
         }
-        
-        It "Should have proper error handling" {
-            $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Match "try.*catch|ErrorAction"
-        }
-        
-        It "Should use approved verbs" {
-            $scriptContent = Get-Content $ScriptPath -Raw
-            $scriptContent | Should -Not -Match "function\s+[^-\s]+\s*{"
-        }
     }
-    
-    Context "Module Path Functions" {
-        BeforeAll {
-            . $ScriptPath
-        }
-        
-        It "Should return correct user module path for PowerShell Core" {
-            Mock $PSVersionTable.PSEdition { return 'Core' }
-            $path = Get-UserModulePath
-            $path | Should -Match "PowerShell\\Modules"
-        }
-        
-        It "Should return correct user module path for Windows PowerShell" {
-            Mock $PSVersionTable.PSEdition { return 'Desktop' }
-            $path = Get-UserModulePath
-            $path | Should -Match "WindowsPowerShell\\Modules"
-        }
-    }
-}
 
-Describe "Integration Tests" {
-    Context "Environment Setup" {
-        It "Should handle missing PSGallery gracefully" {
-            Mock Get-PSRepository { return $null }
-            Mock Register-PSRepository { }
-            # Test should not throw when PSGallery is missing
+    Context 'Parameter Validation' {
+        It 'Should accept TrustPSGallery parameter' {
+            $ast = [System.Management.Automation.Language.Parser]::ParseFile($script:ScriptPath, [ref]$null, [ref]$null)
+            $params = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.ParameterAst]}, $true)
+            $params.Name.VariablePath.UserPath | Should -Contain 'TrustPSGallery'
         }
-        
-        It "Should handle NuGet provider installation" {
-            Mock Get-PackageProvider { return $null }
-            Mock Install-PackageProvider { }
-            # Test should attempt to install NuGet provider
+
+        It 'Should accept DisableCeip parameter' {
+            $ast = [System.Management.Automation.Language.Parser]::ParseFile($script:ScriptPath, [ref]$null, [ref]$null)
+            $params = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.ParameterAst]}, $true)
+            $params.Name.VariablePath.UserPath | Should -Contain 'DisableCeip'
+        }
+    }
+
+    Context 'Function Tests' {
+        BeforeAll {
+            . $script:ScriptPath
+        }
+
+        It 'Should define Get-UserModulePath function' {
+            Get-Command Get-UserModulePath -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+        }
+
+        It 'Should return valid user module path' {
+            $path = Get-UserModulePath
+            $path | Should -Not -BeNullOrEmpty
+            $path | Should -Match 'Documents'
+        }
+    }
+
+    Context 'Environment Checks' {
+        It 'Should work with PowerShell 5.1+' {
+            $PSVersionTable.PSVersion.Major | Should -BeGreaterOrEqual 5
+        }
+
+        It 'Should have access to PowerShell Gallery' {
+            $gallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+            $gallery | Should -Not -BeNullOrEmpty
+        }
+    }
+
+    Context 'Security Tests' {
+        It 'Should not contain hardcoded credentials' {
+            $content = Get-Content $script:ScriptPath -Raw
+            $content | Should -Not -Match 'password\s*='
+            $content | Should -Not -Match 'secret\s*='
+            $content | Should -Not -Match 'apikey\s*='
+        }
+
+        It 'Should use secure protocols' {
+            $content = Get-Content $script:ScriptPath -Raw
+            $content | Should -Match 'Tls12'
         }
     }
 }

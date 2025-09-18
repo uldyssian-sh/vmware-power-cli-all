@@ -1,5 +1,5 @@
 {
-  "name": "vmware-power-cli-all",
+  "name": "@enterprise/vmware-power-cli-all",
   "version": "1.0.0",
   "description": "Enterprise-grade VMware PowerCLI installation and management toolkit with advanced automation capabilities",
   "main": "Install-PowerCLI-All.ps1",

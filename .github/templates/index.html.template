@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware PowerCLI All - ${ENVIRONMENT}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .env-banner { background: ${ENVIRONMENT == 'production' ? '#28a745' : ENVIRONMENT == 'staging' ? '#ffc107' : '#17a2b8'}; color: white; padding: 8px; text-align: center; font-weight: bold; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .card { background: rgba(255,255,255,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 10px; }
+        .status { color: #28a745; font-weight: bold; font-size: 1.2em; margin: 20px 0; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+        .info-item { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #007bff; }
+        .info-item strong { color: #495057; }
+        .links { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; }
+        .links a { padding: 12px 24px; background: linear-gradient(45deg, #007bff, #0056b3); color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s; font-weight: 500; }
+        .links a:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.4); }
+        .footer { text-align: center; margin-top: 40px; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="env-banner">
+        🚀 ${ENVIRONMENT^^} ENVIRONMENT 🚀
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>VMware PowerCLI All</h1>
+                <p>Enterprise-grade VMware PowerCLI installation and management toolkit</p>
+                <div class="status">✅ Deployment successful</div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Environment:</strong><br>${ENVIRONMENT^}
+                </div>
+                <div class="info-item">
+                    <strong>Repository:</strong><br>${REPOSITORY}
+                </div>
+                <div class="info-item">
+                    <strong>Commit:</strong><br>${COMMIT_SHA:0:8}
+                </div>
+                <div class="info-item">
+                    <strong>Build:</strong><br>#${BUILD_TIME}
+                </div>
+                <div class="info-item">
+                    <strong>Deployed:</strong><br><span id="time"></span>
+                </div>
+            </div>
+            
+            <div class="links">
+                <a href="https://github.com/${REPOSITORY}">📁 Repository</a>
+                <a href="https://github.com/${REPOSITORY}/blob/main/README.md">📖 Documentation</a>
+                <a href="https://github.com/${REPOSITORY}/releases">🏷️ Releases</a>
+                <a href="https://github.com/${REPOSITORY}/issues">🐛 Issues</a>
+            </div>
+            
+            <div class="footer">
+                <p>Powered by GitHub Actions & GitHub Pages</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
