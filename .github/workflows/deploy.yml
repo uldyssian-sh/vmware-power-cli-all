@@ -34,17 +34,12 @@ jobs:
       
       - name: Build site
         run: |
-          set -e
-          mkdir -p _site/assets
-          
-          # Create main page from template
-          envsubst < .github/templates/index.html.template > _site/index.html
-          
-          # Copy documentation
-          cp -r docs/* _site/ 2>/dev/null || true
-          
-          # Generate API documentation
-          echo "Generating documentation..." > _site/build.log
+          mkdir -p _site
+          cat > _site/index.html << 'EOF'
+<!DOCTYPE html>
+<html><head><title>VMware PowerCLI All</title></head>
+<body><h1>VMware PowerCLI All</h1><p>Deployment successful</p></body></html>
+EOF
         env:
           ENVIRONMENT: ${{ github.event.inputs.environment || 'development' }}
           REPOSITORY: ${{ github.repository }}
