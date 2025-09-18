@@ -100,33 +100,33 @@ Connect-VIServer -Server vcenter.domain.com
 ## 📚 Documentation
 
 ### Getting Started
-- **[Installation Guide](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Installation)** - Complete setup instructions
-- **[Quick Start Tutorial](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Quick-Start)** - First steps with the toolkit
-- **[Configuration Guide](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Configuration)** - Environment configuration
+- **[Installation Guide](docs/guides/installation.md)** - Complete setup instructions
+- **[Quick Start Tutorial](docs/tutorials/getting-started.md)** - First steps with the toolkit
+- **[Configuration Guide](docs/guides/configuration.md)** - Environment configuration
 
 ### Script Reference
-- **[VM Management Scripts](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/VM-Scripts)** - Virtual machine operations
-- **[Host Management Scripts](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Host-Scripts)** - ESXi host operations
-- **[Storage Scripts](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Storage-Scripts)** - Storage management
-- **[Network Scripts](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Network-Scripts)** - Network configuration
+- **[VM Management Scripts](examples/basic/)** - Virtual machine operations
+- **[Host Management Scripts](scripts/powercli/)** - ESXi host operations
+- **[Storage Scripts](examples/advanced/)** - Storage management
+- **[Network Scripts](scripts/powercli/)** - Network configuration
 
 ### Best Practices
-- **[PowerCLI Best Practices](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Best-Practices)** - Coding standards and guidelines
-- **[Security Guidelines](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Security)** - Secure automation practices
-- **[Performance Optimization](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Performance)** - Script optimization techniques
+- **[PowerCLI Best Practices](docs/guides/best-practices.md)** - Coding standards and guidelines
+- **[Security Guidelines](docs/guides/security.md)** - Secure automation practices
+- **[Performance Optimization](docs/guides/performance.md)** - Script optimization techniques
 
 ## 🔗 Integration
 
-- **[Jenkins](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Jenkins-Integration)** - Pipeline automation
-- **[Azure DevOps](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Azure-DevOps)** - Microsoft DevOps integration
-- **[vRealize Operations](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/vROps-Integration)** - VMware native monitoring
-- **[Grafana](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Grafana-Integration)** - Custom dashboards
+- **[Jenkins Integration](docs/integrations/jenkins.md)** - Pipeline automation
+- **[Azure DevOps](docs/integrations/azure-devops.md)** - Microsoft DevOps integration
+- **[vRealize Operations](docs/integrations/vrops.md)** - VMware native monitoring
+- **[Grafana Integration](docs/integrations/grafana.md)** - Custom dashboards
 
 ## 🤝 Contributing
 
 1. **[Fork Repository](https://github.com/uldyssian-sh/vmware-power-cli-all/fork)** - Create your contribution fork
-2. **[Development Setup](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Development-Setup)** - Set up development environment
-3. **[Coding Standards](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki/Coding-Standards)** - Follow PowerShell best practices
+2. **[Development Setup](CONTRIBUTING.md)** - Set up development environment
+3. **[Coding Standards](PSScriptAnalyzerSettings.psd1)** - Follow PowerShell best practices
 4. **[Submit Pull Request](https://github.com/uldyssian-sh/vmware-power-cli-all/pulls)** - Contribute your improvements
 
 ## 📄 License
