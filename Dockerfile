@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/powershell:7.4-ubuntu-22.04
+FROM mcr.microsoft.com/powershell:7.5-ubuntu-24.04
 
 LABEL maintainer="VMware PowerCLI Community" \
       version="1.0.0" \
