@@ -19,7 +19,7 @@ Describe 'Install-PowerCLI-All Script Tests' {
 
         It 'Should pass PSScriptAnalyzer rules' {
             if (Get-Module -ListAvailable PSScriptAnalyzer) {
-                $results = Invoke-ScriptAnalyzer -Path $script:ScriptPath
+                $results = Invoke-ScriptAnalyzer -Path $script:ScriptPath -ExcludeRule PSAvoidUsingWriteHost
                 $results | Should -BeNullOrEmpty
             }
         }

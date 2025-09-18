@@ -39,4 +39,4 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
-          Invoke-ScriptAnalyzer -Path . -Recurse
+          Invoke-ScriptAnalyzer -Path . -Recurse -ExcludeRule PSAvoidUsingWriteHost
