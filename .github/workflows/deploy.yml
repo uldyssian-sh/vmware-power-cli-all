@@ -51,7 +51,7 @@ jobs:
           COMMIT_SHA: ${{ github.sha }}
           BUILD_TIME: ${{ github.run_number }}
       
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
       
