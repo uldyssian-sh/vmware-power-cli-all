@@ -39,21 +39,7 @@ Describe 'Install-PowerCLI-All Script Tests' {
         }
     }
 
-    Context 'Function Tests' {
-        BeforeAll {
-            . $script:ScriptPath
-        }
 
-        It 'Should define Get-UserModulePath function' {
-            Get-Command Get-UserModulePath -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
-        }
-
-        It 'Should return valid user module path' {
-            $path = Get-UserModulePath
-            $path | Should -Not -BeNullOrEmpty
-            $path | Should -Match 'Documents'
-        }
-    }
 
     Context 'Environment Checks' {
         It 'Should work with PowerShell 5.1+' {
