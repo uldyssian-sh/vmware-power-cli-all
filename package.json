@@ -30,7 +30,13 @@
     "cloud",
     "datacenter"
   ],
-  "author": "VMware PowerCLI Community",
+  "author": "LT",
+  "contributors": [
+    "LT",
+    "dependabot[bot]",
+    "actions-user",
+    "uldyssian-sh"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/uldyssian-sh/vmware-power-cli-all/issues"
