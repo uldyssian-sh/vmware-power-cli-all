@@ -139,3 +139,13 @@ This project is licensed under the MIT License - see the **[LICENSE](https://git
 - **[Discussions](https://github.com/uldyssian-sh/vmware-power-cli-all/discussions)** - Community support and Q&A
 - **[Wiki](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki)** - Comprehensive documentation
 - **[PowerCLI Community](https://communities.vmware.com/t5/VMware-PowerCLI/bd-p/2006)** - VMware PowerCLI community
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/vmware-power-cli-all/issues)
+- **Security**: [Security Policy](SECURITY.md)
+- **Contributing**: [Contributing Guidelines](CONTRIBUTING.md)
+
+---
+
+**⭐ Star this repository if you find it helpful!**
