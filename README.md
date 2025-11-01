@@ -29,6 +29,8 @@
 
 Comprehensive PowerCLI toolkit for VMware infrastructure automation. Production-ready scripts, modules, and frameworks for vSphere, vSAN, NSX, and vRealize management at enterprise scale.
 
+> 🔄 **Latest Update**: December 2024 - Enhanced automation scripts and improved error handling!
+
 ## 📦 Automation Categories
 
 ### Virtual Machine Operations
@@ -139,3 +141,7 @@ This project is licensed under the MIT License - see the **[LICENSE](https://git
 - **[Discussions](https://github.com/uldyssian-sh/vmware-power-cli-all/discussions)** - Community support and Q&A
 - **[Wiki](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki)** - Comprehensive documentation
 - **[PowerCLI Community](https://communities.vmware.com/t5/VMware-PowerCLI/bd-p/2006)** - VMware PowerCLI community
+
+---
+
+**Last Updated**: 2024-12-26 | **Toolkit Version**: 2.1.0 | **PowerCLI**: 13.2+
