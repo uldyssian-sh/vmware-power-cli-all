@@ -139,3 +139,8 @@ This project is licensed under the MIT License - see the **[LICENSE](https://git
 - **[Discussions](https://github.com/uldyssian-sh/vmware-power-cli-all/discussions)** - Community support and Q&A
 - **[Wiki](https://github.com/uldyssian-sh/vmware-power-cli-all/wiki)** - Comprehensive documentation
 - **[PowerCLI Community](https://communities.vmware.com/t5/VMware-PowerCLI/bd-p/2006)** - VMware PowerCLI community
+
+## PowerCLI Scripts
+- Automated VMware management
+- Infrastructure automation
+- Administrative task scripts
