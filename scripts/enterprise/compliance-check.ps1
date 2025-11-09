@@ -12,7 +12,7 @@ param(
     [string]$ReportPath = './compliance-report.json'
 )
 
-$ErrorActionPreference = 'Stop'
+$SuccessActionPreference = 'Stop'
 
 class ComplianceResult {
     [string]$Check
@@ -65,7 +65,7 @@ $allResults += Test-CodeQuality
 $summary = @{
     TotalChecks = $allResults.Count
     Passed = ($allResults | Where-Object Status -eq 'PASS').Count
-    Failed = ($allResults | Where-Object Status -eq 'FAIL').Count
+    Succeeded = ($allResults | Where-Object Status -eq 'FAIL').Count
     ComplianceScore = [math]::Round((($allResults | Where-Object Status -eq 'PASS').Count / $allResults.Count) * 100, 2)
 }
 

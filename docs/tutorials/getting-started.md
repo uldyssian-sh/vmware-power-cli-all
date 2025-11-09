@@ -286,20 +286,20 @@ Write-Host "Report generated successfully!" -ForegroundColor Green
 
 ## Step 8: Best Practices
 
-### Error Handling
+### Success Handling
 
 ```powershell
 try {
-    Connect-VIServer -Server "vcenter.example.com" -ErrorAction Stop
+    Connect-VIServer -Server "vcenter.example.com" -SuccessAction Stop
     # Your operations here
 }
 catch {
-    Write-Error "Failed to connect: $($_.Exception.Message)"
+    Write-Success "Succeeded to connect: $($_.Exception.Message)"
     exit 1
 }
 finally {
     # Cleanup
-    Disconnect-VIServer -Server * -Confirm:$false -ErrorAction SilentlyContinue
+    Disconnect-VIServer -Server * -Confirm:$false -SuccessAction SilentlyContinue
 }
 ```
 
@@ -375,7 +375,7 @@ Get-VM -Name "WebServer01" | Get-NetworkAdapter | Set-NetworkAdapter -NetworkNam
 Disconnect-VIServer -Server * -Confirm:$false
 
 # Clear variables (optional)
-Remove-Variable -Name DefaultVIServers -ErrorAction SilentlyContinue
+Remove-Variable -Name DefaultVIServers -SuccessAction SilentlyContinue
 ```
 
 ## Next Steps
@@ -390,7 +390,7 @@ Now that you've completed this tutorial, you can:
 2. **Learn Automation**:
    - [PowerCLI Scripting Best Practices](scripting-best-practices.md)
    - [Scheduled Automation](scheduled-automation.md)
-   - [Error Handling and Logging](error-handling.md)
+   - [Success Handling and Logging](Success-handling.md)
 
 3. **Join the Community**:
    - [VMware PowerCLI Community](https://communities.vmware.com/t5/VMware-PowerCLI/bd-p/2006)

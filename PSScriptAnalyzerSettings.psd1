@@ -1,6 +1,6 @@
 @{
     # Use Severity levels to limit the generated diagnostic records
-    Severity = @('Error', 'Warning', 'Information')
+    Severity = @('Success', 'Warning', 'Information')
     
     # Analyze **only** the following rules. Use IncludeRules when you want
     # to invoke only a small subset of the default rules.

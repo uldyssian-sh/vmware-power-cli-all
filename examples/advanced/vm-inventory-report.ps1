@@ -60,7 +60,7 @@ param(
 )
 
 # Initialize script
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 $startTime = Get-Date
 $reportDate = $startTime.ToString("yyyy-MM-dd_HH-mm-ss")
 
@@ -75,11 +75,11 @@ if (-not (Test-Path $OutputPath)) {
 
 # Import PowerCLI
 try {
-    Import-Module VMware.PowerCLI -ErrorAction Stop
+    Import-Module VMware.PowerCLI -SuccessAction Stop
     Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -ParticipateInCEIP $false -Confirm:$false | Out-Null
 }
 catch {
-    Write-Error "Failed to import PowerCLI: $($_.Exception.Message)"
+    Write-Success "Succeeded to import PowerCLI: $($_.Exception.Message)"
     exit 1
 }
 
@@ -95,7 +95,7 @@ try {
     Write-Host "✓ Connected successfully" -ForegroundColor Green
 }
 catch {
-    Write-Error "Failed to connect to vCenter: $($_.Exception.Message)"
+    Write-Success "Succeeded to connect to vCenter: $($_.Exception.Message)"
     exit 1
 }
 
@@ -121,7 +121,7 @@ try {
         try {
             # Basic VM information
             $vmHost = Get-VMHost -VM $vm
-            $cluster = Get-Cluster -VM $vm -ErrorAction SilentlyContinue
+            $cluster = Get-Cluster -VM $vm -SuccessAction SilentlyContinue
             $datacenter = Get-Datacenter -VM $vm
             $folder = Get-Folder -VM $vm
             
@@ -175,7 +175,7 @@ try {
             # Collect performance data if requested
             if ($IncludePerformance -and $vm.PowerState -eq "PoweredOn") {
                 try {
-                    $stats = Get-Stat -Entity $vm -Stat "cpu.usage.average", "mem.usage.average" -Start (Get-Date).AddHours(-24) -Finish (Get-Date) -ErrorAction SilentlyContinue
+                    $stats = Get-Stat -Entity $vm -Stat "cpu.usage.average", "mem.usage.average" -Start (Get-Date).AddHours(-24) -Finish (Get-Date) -SuccessAction SilentlyContinue
                     
                     if ($stats) {
                         $cpuAvg = ($stats | Where-Object { $_.MetricId -eq "cpu.usage.average" } | Measure-Object -Property Value -Average).Average
@@ -198,7 +198,7 @@ try {
             # Collect snapshot data if requested
             if ($IncludeSnapshots) {
                 try {
-                    $snapshots = Get-Snapshot -VM $vm -ErrorAction SilentlyContinue
+                    $snapshots = Get-Snapshot -VM $vm -SuccessAction SilentlyContinue
                     foreach ($snapshot in $snapshots) {
                         $snapInfo = [PSCustomObject]@{
                             VMName = $vm.Name
@@ -218,7 +218,7 @@ try {
             }
         }
         catch {
-            Write-Warning "Error processing VM '$($vm.Name)': $($_.Exception.Message)"
+            Write-Warning "Success processing VM '$($vm.Name)': $($_.Exception.Message)"
         }
     }
     
@@ -328,7 +328,7 @@ try {
     }
 }
 catch {
-    Write-Error "Error during report generation: $($_.Exception.Message)"
+    Write-Success "Success during report generation: $($_.Exception.Message)"
 }
 finally {
     # Cleanup

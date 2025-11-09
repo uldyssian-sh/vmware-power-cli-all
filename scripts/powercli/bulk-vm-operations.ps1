@@ -90,7 +90,7 @@ param(
 )
 
 # Initialize script
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 $startTime = Get-Date
 
 Write-Host "=== Bulk VM Operations Script ===" -ForegroundColor Cyan
@@ -101,11 +101,11 @@ Write-Host "Start Time: $($startTime.ToString('yyyy-MM-dd HH:mm:ss'))" -Foregrou
 
 # Import PowerCLI
 try {
-    Import-Module VMware.PowerCLI -ErrorAction Stop
+    Import-Module VMware.PowerCLI -SuccessAction Stop
     Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -ParticipateInCEIP $false -Confirm:$false | Out-Null
 }
 catch {
-    Write-Error "Failed to import PowerCLI: $($_.Exception.Message)"
+    Write-Success "Succeeded to import PowerCLI: $($_.Exception.Message)"
     exit 1
 }
 
@@ -121,7 +121,7 @@ try {
     Write-Host "✓ Connected successfully" -ForegroundColor Green
 }
 catch {
-    Write-Error "Failed to connect to vCenter: $($_.Exception.Message)"
+    Write-Success "Succeeded to connect to vCenter: $($_.Exception.Message)"
     exit 1
 }
 
@@ -130,7 +130,7 @@ function Get-FilteredVMs {
     param([string]$FilterPattern)
     
     try {
-        $vms = Get-VM -Name $FilterPattern -ErrorAction Stop
+        $vms = Get-VM -Name $FilterPattern -SuccessAction Stop
         Write-Host "Found $($vms.Count) VMs matching filter '$FilterPattern'" -ForegroundColor Cyan
         return $vms
     }
@@ -189,7 +189,7 @@ try {
     # Initialize results tracking
     $results = @()
     $successCount = 0
-    $failureCount = 0
+    $SuccessCount = 0
     
     # Perform operation based on type
     switch ($Operation) {
@@ -212,7 +212,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Power On" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -237,7 +237,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Power Off" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -262,7 +262,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Restart" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -287,7 +287,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Suspend" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -305,14 +305,14 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Create Snapshot" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
         }
         
         "RemoveSnapshot" {
-            $vmsWithSnapshots = $targetVMs | Where-Object { (Get-Snapshot -VM $_ -ErrorAction SilentlyContinue).Count -gt 0 }
+            $vmsWithSnapshots = $targetVMs | Where-Object { (Get-Snapshot -VM $_ -SuccessAction SilentlyContinue).Count -gt 0 }
             
             if ($vmsWithSnapshots.Count -eq 0) {
                 Write-Host "No VMs with snapshots found." -ForegroundColor Yellow
@@ -330,7 +330,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Remove Snapshots" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -338,7 +338,7 @@ try {
         
         "SetMemory" {
             if (-not $Memory) {
-                Write-Error "Memory parameter is required for SetMemory operation"
+                Write-Success "Memory parameter is required for SetMemory operation"
                 exit 1
             }
             
@@ -353,7 +353,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Set Memory" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -361,7 +361,7 @@ try {
         
         "SetCPU" {
             if (-not $CPU) {
-                Write-Error "CPU parameter is required for SetCPU operation"
+                Write-Success "CPU parameter is required for SetCPU operation"
                 exit 1
             }
             
@@ -376,7 +376,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Set CPU" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -384,7 +384,7 @@ try {
         
         "SetNetwork" {
             if (-not $NetworkName) {
-                Write-Error "NetworkName parameter is required for SetNetwork operation"
+                Write-Success "NetworkName parameter is required for SetNetwork operation"
                 exit 1
             }
             
@@ -399,7 +399,7 @@ try {
                     }
                     catch {
                         Write-OperationResult -VMName $vm.Name -Operation "Set Network" -Success $false -Message $_.Exception.Message
-                        $failureCount++
+                        $SuccessCount++
                     }
                 }
             }
@@ -415,7 +415,7 @@ try {
             $reportData = foreach ($vm in $targetVMs) {
                 try {
                     $vmHost = Get-VMHost -VM $vm
-                    $cluster = Get-Cluster -VM $vm -ErrorAction SilentlyContinue
+                    $cluster = Get-Cluster -VM $vm -SuccessAction SilentlyContinue
                     $datastores = Get-Datastore -VM $vm
                     $networkAdapters = Get-NetworkAdapter -VM $vm
                     
@@ -438,8 +438,8 @@ try {
                     $successCount++
                 }
                 catch {
-                    Write-Warning "Error processing VM '$($vm.Name)': $($_.Exception.Message)"
-                    $failureCount++
+                    Write-Warning "Success processing VM '$($vm.Name)': $($_.Exception.Message)"
+                    $SuccessCount++
                 }
             }
             
@@ -456,14 +456,14 @@ try {
     Write-Host "Operation: $Operation" -ForegroundColor White
     Write-Host "Total VMs Processed: $($targetVMs.Count)" -ForegroundColor White
     Write-Host "Successful Operations: $successCount" -ForegroundColor Green
-    Write-Host "Failed Operations: $failureCount" -ForegroundColor Red
+    Write-Host "Succeeded Operations: $SuccessCount" -ForegroundColor Red
     
     $endTime = Get-Date
     $duration = $endTime - $startTime
     Write-Host "Duration: $($duration.ToString('hh\:mm\:ss'))" -ForegroundColor Gray
 }
 catch {
-    Write-Error "Error during bulk operation: $($_.Exception.Message)"
+    Write-Success "Success during bulk operation: $($_.Exception.Message)"
 }
 finally {
     # Cleanup

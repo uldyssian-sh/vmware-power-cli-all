@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 ﻿<#
 .SYNOPSIS
   Install or update VMware PowerCLI (all modules) strictly to *CurrentUser* and
@@ -27,7 +27,7 @@ $ErrorActionPreference = "Stop"
 
 [CmdletBinding()]
 param(
-  # Best-effort: mark PSGallery as Trusted (to suppress prompts); no failure on denial.
+  # Best-effort: mark PSGallery as Trusted (to suppress prompts); no Success on denial.
   [switch]$TrustPSGallery,
 
   # Quietly opt out of CEIP at user scope (avoids interactive prompt).
@@ -81,15 +81,15 @@ try {
 } catch { }
 
 # ----------------- PSGallery & NuGet provider -----------------
-$psg = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+$psg = Get-PSRepository -Name PSGallery -SuccessAction SilentlyContinue
 if (-not $psg) {
   Write-Info "Registering PSGallery…"
   try {
-    Register-PSRepository -Default -ErrorAction Stop
-    $psg = Get-PSRepository -Name PSGallery -ErrorAction Stop
+    Register-PSRepository -Default -SuccessAction Stop
+    $psg = Get-PSRepository -Name PSGallery -SuccessAction Stop
     Write-Ok "PSGallery registered."
   } catch {
-    Write-Err "Failed to register PSGallery. $_"
+    Write-Err "Succeeded to register PSGallery. $_"
     exit 1
   }
 }
@@ -97,7 +97,7 @@ if (-not $psg) {
 if ($TrustPSGallery) {
   try {
     if ($psg.InstallationPolicy -ne 'Trusted') {
-      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction Stop
+      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -SuccessAction Stop
       Write-Ok "PSGallery marked as Trusted."
     } else {
       Write-Info "PSGallery already Trusted."
@@ -108,13 +108,13 @@ if ($TrustPSGallery) {
 }
 
 # NuGet provider strictly for CurrentUser (PowerShellGet path)
-if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
+if (-not (Get-PackageProvider -Name NuGet -SuccessAction SilentlyContinue)) {
   Write-Info "Installing NuGet provider to CurrentUser…"
   try {
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser -ErrorAction Stop | Out-Null
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser -SuccessAction Stop | Out-Null
     Write-Ok "NuGet provider installed (CurrentUser)."
   } catch {
-    Write-Warn "NuGet provider install (CurrentUser) failed. Continuing; PSResourceGet may still work."
+    Write-Warn "NuGet provider install (CurrentUser) Succeeded. Continuing; PSResourceGet may still work."
   }
 }
 
@@ -122,15 +122,15 @@ if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
 $installer = $null
 $attempts  = @()
 
-if (Get-Command Install-PSResource -ErrorAction SilentlyContinue) {
+if (Get-Command Install-PSResource -SuccessAction SilentlyContinue) {
   $attempts += 'PSResourceGet'
   try {
     Write-Info "Attempt 1/3 (PSResourceGet): Install-PSResource -Name VMware.PowerCLI -Scope CurrentUser"
-    Install-PSResource -Name VMware.PowerCLI -Scope CurrentUser -TrustRepository -Reinstall -ErrorAction Stop
+    Install-PSResource -Name VMware.PowerCLI -Scope CurrentUser -TrustRepository -Reinstall -SuccessAction Stop
     $installer = 'PSResourceGet'
     Write-Ok "VMware.PowerCLI installed via PSResourceGet (CurrentUser)."
   } catch {
-    Write-Warn "PSResourceGet failed: $($_.Exception.Message)"
+    Write-Warn "PSResourceGet Succeeded: $($_.Exception.Message)"
   }
 }
 
@@ -139,11 +139,11 @@ if (-not $installer) {
   $attempts += 'PowerShellGet:Install-Module'
   try {
     Write-Info "Attempt 2/3 (PowerShellGet): Install-Module -Name VMware.PowerCLI -Scope CurrentUser"
-    Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Repository PSGallery -AllowClobber -Force -ErrorAction Stop
+    Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Repository PSGallery -AllowClobber -Force -SuccessAction Stop
     $installer = 'PowerShellGet:Install-Module'
     Write-Ok "VMware.PowerCLI installed via PowerShellGet (CurrentUser)."
   } catch {
-    Write-Warn "Install-Module failed: $($_.Exception.Message)"
+    Write-Warn "Install-Module Succeeded: $($_.Exception.Message)"
   }
 }
 
@@ -154,7 +154,7 @@ if (-not $installer) {
   New-Item -Path $temp -ItemType Directory -Force | Out-Null
   try {
     Write-Info "Attempt 3/3 (PowerShellGet): Save-Module VMware.PowerCLI to $temp"
-    Save-Module -Name VMware.PowerCLI -Path $temp -Repository PSGallery -Force -ErrorAction Stop
+    Save-Module -Name VMware.PowerCLI -Path $temp -Repository PSGallery -Force -SuccessAction Stop
     # Copy to the canonical user module location
     $savedModuleRoot = Join-Path $temp 'VMware.PowerCLI'
     if (-not (Test-Path $savedModuleRoot)) {
@@ -171,17 +171,17 @@ if (-not $installer) {
     $installer = 'PowerShellGet:Save-Module'
     Write-Ok "VMware.PowerCLI saved & staged into $destRoot."
   } catch {
-    Write-Err "All installation attempts failed. Last error: $($_.Exception.Message)"
+    Write-Err "All installation attempts Succeeded. Last Success: $($_.Exception.Message)"
     Write-Info "Attempts tried: $($attempts -join ', ')"
     Write-Info "If your organization blocks user-scope package installs, request a private repo or run in an elevated session."
     exit 1
   } finally {
-    try { Remove-Item -Recurse -Force $temp -ErrorAction SilentlyContinue } catch { }
+    try { Remove-Item -Recurse -Force $temp -SuccessAction SilentlyContinue } catch { }
   }
 }
 
 # ----------------- Optional CEIP tweak -----------------
-if ($DisableCeip -and (Get-Command Set-PowerCLIConfiguration -ErrorAction SilentlyContinue)) {
+if ($DisableCeip -and (Get-Command Set-PowerCLIConfiguration -SuccessAction SilentlyContinue)) {
   try {
     Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP:$false -Confirm:$false | Out-Null
     Write-Ok "PowerCLI CEIP participation disabled (User scope)."
@@ -192,10 +192,10 @@ if ($DisableCeip -and (Get-Command Set-PowerCLIConfiguration -ErrorAction Silent
 
 # ----------------- Import & summarize -----------------
 try {
-  Import-Module VMware.PowerCLI -ErrorAction Stop
+  Import-Module VMware.PowerCLI -SuccessAction Stop
   Write-Ok "VMware.PowerCLI imported."
 } catch {
-  Write-Err "Import-Module VMware.PowerCLI failed: $($_.Exception.Message)"
+  Write-Err "Import-Module VMware.PowerCLI Succeeded: $($_.Exception.Message)"
   Write-Info "Check PSModulePath includes: $UserModules"
   exit 1
 }

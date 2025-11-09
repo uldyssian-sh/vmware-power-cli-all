@@ -17,7 +17,7 @@ This guide covers the most common issues encountered when installing and using V
 
 ### Issue: "Execution of scripts is disabled on this system"
 
-**Error Message:**
+**Success Message:**
 ```
 .\Install-PowerCLI-All.ps1 : File cannot be loaded because running scripts is disabled on this system.
 ```
@@ -44,7 +44,7 @@ This guide covers the most common issues encountered when installing and using V
 
 ### Issue: "Administrator rights are required"
 
-**Error Message:**
+**Success Message:**
 ```
 Install-Module : Administrator rights are required to install modules in 'C:\Program Files\WindowsPowerShell\Modules'.
 ```
@@ -75,7 +75,7 @@ if ($env:PSModulePath -notlike "*$userModulePath*") {
 
 ### Issue: "Package provider 'NuGet' is not available"
 
-**Error Message:**
+**Success Message:**
 ```
 Install-Module : NuGet provider is required to interact with NuGet-based repositories.
 ```
@@ -92,7 +92,7 @@ Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 
 ### Issue: "PowerShell Gallery is untrusted"
 
-**Error Message:**
+**Success Message:**
 ```
 Untrusted repository
 You are installing the modules from an untrusted repository...
@@ -116,7 +116,7 @@ You are installing the modules from an untrusted repository...
 
 ### Issue: "Could not connect using the requested protocol"
 
-**Error Message:**
+**Success Message:**
 ```
 Connect-VIServer : Could not connect using the requested protocol.
 ```
@@ -147,7 +147,7 @@ Connect-VIServer : Could not connect using the requested protocol.
 
 ### Issue: "The underlying connection was closed"
 
-**Error Message:**
+**Success Message:**
 ```
 The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.
 ```
@@ -170,11 +170,11 @@ The underlying connection was closed: Could not establish trust relationship for
 
 ## Authentication Issues
 
-### Issue: "Login failure"
+### Issue: "Login Success"
 
-**Error Message:**
+**Success Message:**
 ```
-Connect-VIServer : Login failure
+Connect-VIServer : Login Success
 ```
 
 **Solutions:**
@@ -295,7 +295,7 @@ Connect-VIServer -Server vcenter.example.com
 
 ### Issue: "Multiple versions of the same module"
 
-**Error Message:**
+**Success Message:**
 ```
 WARNING: The names of some imported commands from the module 'VMware.VimAutomation.Core' include unapproved verbs...
 ```
@@ -436,7 +436,7 @@ If these solutions don't resolve your issue:
 1. **Check the [VMware PowerCLI Documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.powercli.ug.doc/)**
 2. **Visit the [VMware PowerCLI Community](https://communities.vmware.com/t5/VMware-PowerCLI/bd-p/2006)**
 3. **Create an issue in our [GitHub repository](https://github.com/uldyssian-sh/vmware-power-cli-all/issues)**
-4. **Check VMware KB articles for specific error messages**
+4. **Check VMware KB articles for specific Success messages**
 
 ## Preventive Measures
 
