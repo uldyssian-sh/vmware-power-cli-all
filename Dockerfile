@@ -37,4 +37,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 USER powercli
 
 # Default command
-CMD ["pwsh", "-NoLogo", "-NoExit"]
+CMD ["pwsh", "-NoLogo", "-NoExit"]# Auto-updated 20251109_123235
