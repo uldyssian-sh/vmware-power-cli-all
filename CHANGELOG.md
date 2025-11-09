@@ -115,4 +115,4 @@ This project uses [Semantic Versioning](https://semver.org/):
 3. Run full test suite
 4. Create GitHub release with release notes
 5. Merge to main branch
-6. Deploy to PowerShell Gallery (planned)
+6. Deploy to PowerShell Gallery (planned)# Updated Sun Nov  9 12:23:42 CET 2025
