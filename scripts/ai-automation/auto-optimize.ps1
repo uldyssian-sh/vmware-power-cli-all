@@ -77,7 +77,6 @@ function Update-Documentation {
         if ($readme -notmatch 'CI.*badge\.svg' -and -not $DryRun) {
             $readme = $badges + "`n`n" + $readme
             Set-Content -Path $readmePath -Value $readme -NoNewline
-            Write-Log "Updated README badges" -Level 'SUCCESS'
         }
     }
 }
