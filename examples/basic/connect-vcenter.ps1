@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 # Basic vCenter Connection Example
 # This script demonstrates how to connect to a vCenter Server using PowerCLI
 

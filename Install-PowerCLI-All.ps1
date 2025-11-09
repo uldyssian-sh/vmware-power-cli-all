@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 ﻿<#
 .SYNOPSIS
   Install or update VMware PowerCLI (all modules) strictly to *CurrentUser* and
