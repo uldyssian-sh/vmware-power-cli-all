@@ -220,3 +220,4 @@ Write-Host ""
 Write-Info "Next: Connect-VIServer -Server <vcenter.example.com>"
 Write-Info "Tip : Get-Command -Module VMware.* | Out-Host -Paging"
 # Updated Sun Nov  9 12:23:42 CET 2025
+# Complete refresh Sun Nov  9 12:26:27 CET 2025

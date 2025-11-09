@@ -74,4 +74,4 @@ body:
       description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/uldyssian-sh/vmware-power-cli-all/blob/main/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow this project's Code of Conduct
-          required: true
+          required: true# Complete refresh Sun Nov  9 12:26:27 CET 2025

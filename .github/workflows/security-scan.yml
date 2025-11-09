@@ -41,3 +41,4 @@ jobs:
       with:
         sarif_file: 'trivy-results.sarif'
         category: 'trivy'
+# Complete refresh Sun Nov  9 12:26:27 CET 2025
