@@ -18,9 +18,7 @@
 └─────────────────────────────────────────────────────────────┘
 ```
 
-[![PowerShell](https://img.shields.io/badge/PowerShell-7.0+-5391FE.svg)](https://github.com/PowerShell/PowerShell)
 [![PowerCLI](https://img.shields.io/badge/PowerCLI-13.0+-00A1C9.svg)](https://www.vmware.com/support/developer/PowerCLI/)
-[![VMware](https://img.shields.io/badge/VMware-vSphere%208-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
