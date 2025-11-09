@@ -1,9 +1,0 @@
-name: Weekly Activity
-on: [workflow_dispatch]
-jobs:
-  activity:
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo "✅ Success"
-# Complete refresh Sun Nov  9 12:26:27 CET 2025
-# Auto-updated 20251109_123235
