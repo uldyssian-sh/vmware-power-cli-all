@@ -12,6 +12,12 @@
 [![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
 [![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 
+[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
+[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
+[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
+[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
+
 <div align="center">
 
 ```
@@ -71,6 +77,12 @@ Comprehensive PowerCLI toolkit for VMware infrastructure automation. Production-
 
 ```powershell
 # Install PowerCLI
+
+[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
+[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
+[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
+[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 
 [![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
