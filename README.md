@@ -1,16 +1,4 @@
 # VMware PowerCLI Complete Toolkit
-
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
-
 <div align="center">
 
 ```
@@ -28,10 +16,6 @@
 │  └─────────────┘    └─────────────┘    └─────────────┘     │
 └─────────────────────────────────────────────────────────────┘
 ```
-
-[![PowerCLI](https://img.shields.io/badge/PowerCLI-13.0+-00A1C9.svg)](https://www.vmware.com/support/developer/PowerCLI/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 </div>
 
 ## 🚀 Enterprise VMware Automation Platform
@@ -70,18 +54,6 @@ Comprehensive PowerCLI toolkit for VMware infrastructure automation. Production-
 
 ```powershell
 # Install PowerCLI
-
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
-
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-power-cli-all?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-power-cli-all?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force
 
 # Clone repository
